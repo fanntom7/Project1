@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Массивы и функции</title>
+</head>
+<body>
+  <script>
+    // Задание 1
+
+    // Функция выводит массив на экран
+    function printArray(array) {
+      console.log("Массив:", array);
+    }
+
+    // Функция выводит только четные элементы массива
+    function printEvenElements(array) {
+      console.log("Четные элементы:");
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] % 2 === 0) {
+          console.log(array[i]);
+        }
+      }
+    }
+
+    // Функция возвращает сумму всех элементов массива
+    function getArraySum(array) {
+      var sum = 0;
+      for (var i = 0; i < array.length; i++) {
+        sum += array[i];
+      }
+      return sum;
+    }
+
+    // Функция возвращает максимальный элемент массива
+    function getMaxElement(array) {
+      var max = array[0];
+      for (var i = 1; i < array.length; i++) {
+        if (array[i] > max) {
+          max = array[i];
+        }
+      }
+      return max;
+    }
+
+    // Функция добавляет новый элемент в массив по указанному индексу
+    function addElementAtIndex(array, element, index) {
+      array.splice(index, 0, element);
+    }
+
+    // Функция удаляет элемент из массива по указанному индексу
+    function removeElementAtIndex(array, index) {
+      array.splice(index, 1);
+    }
+
+    // Задание 2
+
+    // Функция возвращает новый массив, объединяя элементы из двух массивов без повторений
+    function mergeArrays(array1, array2) {
+      var mergedArray = array1.concat(array2);
+      return [...new Set(mergedArray)];
+    }
+
+    // Функция возвращает новый массив, содержащий общие элементы из двух массивов без повторений
+    function getCommonElements(array1, array2) {
+      return array1.filter(value => array2.includes(value));
+    }
+
+    // Функция возвращает новый массив, содержащий элементы из первого массива, которых нет во втором массиве
+    function getUniqueElements(array1, array2) {
+      return array1.filter(value => !array2.includes(value));
+    }
+
+    // Задание 3
+
+    // Массив фруктов
+    var fruits = ["apple", "orange", "banana", "kiwi", "mango"];
+
+    // Функция выводит массив фруктов на экран в виде списка (с помощью тегов ul и li)
+    function printFruits() {
+      document.write("<ul>");
+      for (var i = 0; i < fruits.length; i++) {
+        document.write("<li>" + fruits[i] + "</li>");
+      }
+      document.write("</ul>");
+    }
+
+    // Функция поиска фрукта в массиве (нерегистрозависимый поиск)
+    function searchFruit(fruit) {
+      fruit = fruit.toLowerCase();
+      for (var i = 0; i < fruits.length; i++) {
+        if (fruits[i].toLowerCase() === fruit) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    // Вызов функций и вывод результатов в консоль
+
+    // Задание 1
+    var array1 = [5, 2, 9, 1, 7, 3, 6, 8, 4, 0];
+    printArray(array1);
+    printEvenElements(array1);
+    console.log("Сумма элементов массива: " + getArraySum(array1));
+    console.log("Максимальный элемент массива: " + getMaxElement(array1));
+    addElementAtIndex(array1, 10, 2);
+    console.log("Массив после добавления элемента:", array1);
+    removeElementAtIndex(array1, 5);
+    console.log("Массив после удаления элемента:", array1);
+
+    // Задание 2
+    var array2 = [3, 5, 2, 8, 4];
+    console.log("Объединение массивов без повторений:", mergeArrays(array1, array2));
+    console.log("Общие элементы без повторений:", getCommonElements(array1, array2));
+    console.log("Уникальные элементы первого массива:", getUniqueElements(array1, array2));
+
+    // Задание 3
+    console.log("Массив фруктов:");
+    printFruits();
+    console.log("Поиск фрукта 'banana' (индекс):", searchFruit("banana"));
+    console.log("Поиск фрукта 'cherry' (индекс):", searchFruit("cherry"));
+  </script>
+</body>
+</html>

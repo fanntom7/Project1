@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Объекты и функции</title>
+</head>
+<body>
+  <script>
+    // Задание 1
+
+    // Объект автомобиля
+    var car = {
+      manufacturer: "Toyota",
+      model: "Camry",
+      year: 2022,
+      averageSpeed: 80,
+    };
+
+    // Функция выводит информацию об автомобиле на экран
+    function printCarInfo(car) {
+      console.log("Производитель: " + car.manufacturer);
+      console.log("Модель: " + car.model);
+      console.log("Год выпуска: " + car.year);
+      console.log("Средняя скорость: " + car.averageSpeed + " км/ч");
+    }
+
+    // Функция расчета времени для преодоления расстояния
+    function calculateTime(distance, averageSpeed) {
+      var travelTime = distance / averageSpeed;
+      var restCount = Math.floor(travelTime / 4);
+      travelTime += restCount;
+      return travelTime;
+    }
+
+    // Задание 2
+
+    // Объект дроби
+    var fraction1 = {
+      numerator: 1,
+      denominator: 2,
+    };
+
+    var fraction2 = {
+      numerator: 3,
+      denominator: 4,
+    };
+
+    // Функция сложения двух дробей
+    function addFractions(fraction1, fraction2) {
+      var result = {
+        numerator: fraction1.numerator * fraction2.denominator + fraction2.numerator * fraction1.denominator,
+        denominator: fraction1.denominator * fraction2.denominator,
+      };
+      return result;
+    }
+
+    // Функция вычитания двух дробей
+    function subtractFractions(fraction1, fraction2) {
+      var result = {
+        numerator: fraction1.numerator * fraction2.denominator - fraction2.numerator * fraction1.denominator,
+        denominator: fraction1.denominator * fraction2.denominator,
+      };
+      return result;
+    }
+
+    // Функция умножения двух дробей
+    function multiplyFractions(fraction1, fraction2) {
+      var result = {
+        numerator: fraction1.numerator * fraction2.numerator,
+        denominator: fraction1.denominator * fraction2.denominator,
+      };
+      return result;
+    }
+
+    // Функция деления двух дробей
+    function divideFractions(fraction1, fraction2) {
+      var result = {
+        numerator: fraction1.numerator * fraction2.denominator,
+        denominator: fraction1.denominator * fraction2.numerator,
+      };
+      return result;
+    }
+
+    // Функция сокращения дроби
+    function reduceFraction(fraction) {
+      var gcd = calculateGCD(fraction.numerator, fraction.denominator);
+      fraction.numerator /= gcd;
+      fraction.denominator /= gcd;
+      return fraction;
+    }
+
+    // Функция расчета наибольшего общего делителя (Алгоритм Евклида)
+    function calculateGCD(a, b) {
+      while (b !== 0) {
+        var temp = b;
+        b = a % b;
+        a = temp;
+      }
+      return a;
+    }
+
+    // Задание 3
+
+    // Объект времени
+    var time = {
+      hours: 10,
+      minutes: 20,
+      seconds: 30,
+    };
+
+    // Функция вывода времени на экран
+    function printTime(time) {
+      var formattedTime = padZero(time.hours) + ":" + padZero(time.minutes) + ":" + padZero(time.seconds);
+      console.log("Текущее время: " + formattedTime);
+    }
+
+    // Функция изменения времени на заданное количество секунд
+    function changeTimeBySeconds(time, seconds) {
+      var totalSeconds = timeToSeconds(time) + seconds;
+      time = secondsToTime(totalSeconds);
+      return time;
+    }
+
+    // Функция изменения времени на заданное количество минут
+    function changeTimeByMinutes(time, minutes) {
+      var totalMinutes = timeToMinutes(time) + minutes;
+      time = minutesToTime(totalMinutes);
+      return time;
+    }
+
+    // Функция изменения времени на заданное количество часов
+    function changeTimeByHours(time, hours) {
+      time.hours += hours;
+      if (time.hours >= 24) {
+        time.hours %= 24;
+      }
+      return time;
+    }
+
+    // Вспомогательная функция для форматирования времени
+    function padZero(number) {
+      return number < 10 ? "0" + number : number;
+    }
+
+    // Вспомогательная функция для преобразования времени в секунды
+    function timeToSeconds(time) {
+      return time.hours * 3600 + time.minutes * 60 + time.seconds;
+    }
+
+    // Вспомогательная функция для преобразования секунд во время
+    function secondsToTime(seconds) {
+      var time = {
+        hours: Math.floor(seconds / 3600),
+        minutes: Math.floor((seconds % 3600) / 60),
+        seconds: seconds % 60,
+      };
+      return time;
+    }
+
+    // Вспомогательная функция для преобразования времени в минуты
+    function timeToMinutes(time) {
+      return time.hours * 60 + time.minutes;
+    }
+
+    // Вспомогательная функция для преобразования минут во время
+    function minutesToTime(minutes) {
+      var time = {
+        hours: Math.floor(minutes / 60),
+        minutes: minutes % 60,
+        seconds: 0,
+      };
+      return time;
+    }
+
+    // Вызов функций и вывод результатов в консоль
+
+    // Задание 1
+    printCarInfo(car);
+    console.log("Время для преодоления 500 км:", calculateTime(500, car.averageSpeed) + " ч");
+
+    // Задание 2
+    console.log("Сложение дробей:", addFractions(fraction1, fraction2));
+    console.log("Вычитание дробей:", subtractFractions(fraction1, fraction2));
+    console.log("Умножение дробей:", multiplyFractions(fraction1, fraction2));
+    console.log("Деление дробей:", divideFractions(fraction1, fraction2));
+    console.log("Сокращение дроби 1/2:", reduceFraction(fraction1));
+
+    // Задание 3
+    printTime(time);
+    time = changeTimeBySeconds(time, 30);
+    printTime(time);
+    time = changeTimeByMinutes(time, 10);
+    printTime(time);
+    time = changeTimeByHours(time, 2);
+    printTime(time);
+  </script>
+</body>
+</html>
